@@ -1,15 +1,27 @@
 {% extends 'products/layout.html'%}
 
 {% block content%}
+<img src="{{product.product_image.url}}" class="img-responsive">
+
 <h3 class="center-align red lighten-3">{{product.product_name}}</h3>
 <div class="card">
     <div class="card-content">
-    {{product.product_description}}
+    Product code: {{product.product_code}}
     </div>
 
-    <div class="card-action">
-    {{product.product_image}}
+    <div class="card-content">
+    Description: {{product.product_description}}
     </div>
+
+    <div class="card-content">
+    Available in the storage: {{product.product_available}}
+    </div>
+
+    <div class="card-content">
+    Price: {{product.product_price}}€
+    </div>
+
 </div>
 <a href="/products" class="btn">Go Back</a>
 {% endblock %}
+

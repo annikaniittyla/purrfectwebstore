@@ -1,13 +1,16 @@
 {% extends 'products/layout.html' %}
 
 {% block content %}
+
 <header class="container center-align">
     <h3>Categories</h3>
 <header>
 <h3 class="center-align red lighten-3">{{category_name}}</h3>
 <ul class="collection">
     {% for category in categories %}
-        <li class="collection-item"><a href="/products/category_details/{{category.id}}">{{category.category_name}}</a></li>
+        <li class="collection-item"><a href="{% url 'category_details' category.id %}">{{category.category_name}}</a></li>
+    
+        <img src="{{category.category_logo.url}}" class="img-responsive">
     {% endfor %}
 </ul>
  

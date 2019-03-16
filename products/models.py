@@ -5,7 +5,7 @@ from django.db import models
 class Category(models.Model):
     category_name = models.CharField(max_length=250) #db_index=True)
     category_slug = models.SlugField(max_length=200, db_index=True, blank=True, null=True, unique=True)
-    category_logo = models.CharField(max_length=1000, null=True)
+    category_logo = models.ImageField(upload_to = 'pic_folder/', default ='pic_folder/None/no-img.jpg')
 
     class Meta:
         ordering = ('category_name',)
@@ -27,7 +27,7 @@ class Products(models.Model):
     product_slug = models.SlugField(max_length=200, db_index=True, null=True)
     product_code = models.IntegerField()
     product_description = models.TextField(blank=True)
-    product_image = models.CharField(max_length=1000)
+    product_image = models.ImageField(upload_to = 'pic_folder/', default ='pic_folder/None/no-img.jpg')
     product_price = models.DecimalField(max_digits=10, decimal_places=2, null=True)
     product_stock = models.PositiveIntegerField(null=True)
     product_available = models.BooleanField()
