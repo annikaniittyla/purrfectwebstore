@@ -41,20 +41,3 @@ class Products(models.Model):
     def __str__(self):
         return self.product_name
     
-"""
-#Tuotteella pitää olla nimi, koodi ja lisätietoja
-
-#Jokaisella kategorialla on juokseva indexointi
-class Category(models.Model):
-    category_name = models.CharField(max_length=250)
-
-class Product(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    product_name = models.CharField(max_length=250)
-    product_code = models.IntegerField()
-    product_image = models.CharField(max_length=1000)
-
-
-# Uusi tuote linkitetään kategorian indexiin. Foreign key on indeksi
-# Jos kategoria poistetaan, myös siihen kuuluvat tuotteet poistetaan
-"""
