@@ -1,7 +1,7 @@
 from django.db import models
-#from django.core.urlresolvers import reverse
+from django.urls import reverse
 
-#Jokaisella kategorialla on juokseva indexointi
+
 class Category(models.Model):
     category_name = models.CharField(max_length=250) #db_index=True)
     category_slug = models.SlugField(max_length=200, db_index=True, blank=True, null=True, unique=True)
@@ -12,14 +12,17 @@ class Category(models.Model):
         verbose_name = 'category'
         verbose_name_plural = "categories"
 
+    def get_absolute_url(self):
+         return reverse('category_details', kwargs={self.pk})
+
+
     def __str__(self):
         return self.category_name
 
     @property
     def get_products(self):
         return Products.objects.filter(category_name=self.category_name)
-    # def get_absolute_url(self):
-    #     return reverse('shop:product_list_by_category', args=[self.category_slug])
+    
 
 class Products(models.Model):
     category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
@@ -37,6 +40,9 @@ class Products(models.Model):
         index_together = (('id', 'product_slug'),)
         verbose_name = 'product'
         verbose_name_plural = "products"
+
+    def get_absolute_url(self):
+         return reverse('details', kwargs={self.pk})
 
     def __str__(self):
         return self.product_name
