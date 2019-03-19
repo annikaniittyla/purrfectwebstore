@@ -1,0 +1,39 @@
+{% extends 'products/layout.html'%}
+{% block title %}Results{% endblock %}
+
+{% block content%}
+<h3 class="center-align red lighten-3">{{product_name}}</h3>
+<ul class="collection">
+    {% for product in products %}
+            <li class="collection-item"><a href="/products/details/{{product.id}}">{{product.product_name}}</a></li>
+    {% endfor %}  
+</ul>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if products.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ products.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ products.product_description }} of {{ products.paginator.num_pages }}.
+        </span>
+
+        {% if products.has_next %}
+            <a href="?page={{ products.next_page_number }}">next</a>
+            <a href="?page={{ products.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+    <a href="/products" class="btn">To Frontpage</a>
+{% endblock %}
+
+<!--
+  {{ product.product.name}}<br>
+    
+    <h1><a href="{% url 'category_details' %}"> </a>
+
+    <p>{{product.product_description}}</p>
+    <p><a href="{% url 'category_details' %}"
+-->

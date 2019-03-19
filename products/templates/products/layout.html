@@ -44,13 +44,8 @@
                     </li>
                 </ul>
 
-                    <form class="navbar-form navbar-left" role="search" method="get" action="#">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="q" value="">
-                        </div>
-                        <button type="submit" class="btn btn-default">Search</button>
-                    </form>
-
+            
+            <!-- Add Category -->
                     <ul class= "nav navbar-nav navbar-right">
                     <li class="">
                         <a href="{% url 'category-add' %}">
@@ -58,6 +53,21 @@
                             Add Category
                         </a>
                     </li>
+            <!-- Add Product   -->
+                    <li class="">
+                        <a href="{% url 'product-add' %}"> 
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;
+                            Add Product
+                        </a>
+                    </li>
+            <!-- Search -->
+                    <form class="navbar-form navbar-left" role="search" method="GET" action="{% url 'search' %}">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="q" value ="{{request.GET.q}}">
+                        </div>
+                        <button type="submit" class="btn btn-default">Search</button>
+                    </form>
+            <!-- Admin Logout -->
                     <li class="">
                         <a href="#">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;

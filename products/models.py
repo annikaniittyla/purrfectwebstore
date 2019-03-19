@@ -1,7 +1,6 @@
 from django.db import models
 from django.urls import reverse
 
-
 class Category(models.Model):
     category_name = models.CharField(max_length=250) #db_index=True)
     category_slug = models.SlugField(max_length=200, db_index=True, blank=True, null=True, unique=True)
@@ -14,7 +13,6 @@ class Category(models.Model):
 
     def get_absolute_url(self):
          return reverse('category_details', kwargs={self.pk})
-
 
     def __str__(self):
         return self.category_name

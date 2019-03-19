@@ -1,8 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
-from .models import Category, Products
 from django.views import generic
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import View, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.db.models import Q
+from django.core.paginator import Paginator
+from .models import Category, Products
+from .forms import UserForm
 
 class IndexView(generic.ListView):
     template_name = 'products/index.html'
@@ -10,30 +16,52 @@ class IndexView(generic.ListView):
     
     def get_queryset(self):
         return Category.objects.all()
-
+"""
 class DetailView(generic.DetailView):
     model = Products
     template_name = 'products/details.html'
-
-class CategoryDetailView(generic.DetailView):
-    model = Category    
-    template_name = 'products/category_details.html'   
-
-
+"""
 class CategoryCreate(CreateView):
     model = Category
     fields = ['category_name', 'category_slug', 'category_logo']
+class CategoryUpdate(UpdateView):
+    model = Category
+    fields = ['category_name', 'category_slug', 'category_logo']
 
+class CategoryDelete(DeleteView):
+    model = Category
+    success_url = reverse_lazy('index')
+class ProductCreate(CreateView):
+    model = Products
+    fields = ['category', 'product_name', 'product_slug', 'product_code', 'product_description', 'product_price', 'product_stock', 'product_available', 'product_image']
 
-"""
-def index(request):
-    categories = Category.objects.all()    
+class ProductUpdate(UpdateView):
+    model = Products
+    fields = ['category', 'product_name', 'product_slug', 'product_code', 'product_description', 'product_price', 'product_stock', 'product_available', 'product_image']
+
+class ProductDelete(DeleteView):
+    model = Products
+    success_url = reverse_lazy('index')
+    
+class UserFormView(View):
+    form_class = UserForm
+    template_name = 'products/registration_form.html'
+
+def category_details(request, id):
+    category = Category.objects.get(id=id)
+    products = Products.objects.filter(category=category)
+
     context = {
-        'title': 'Choose a category',
-        "categories" : categories
+        'products': products
     }
-    return render(request, 'products/index.html', context)
+    return render(request, 'products/category_details.html', context)
 
+def search(request):
+    query = request.GET.get('q')
+    results = Products.objects.filter(Q(product_name__icontains=query) | Q(product_description__icontains=query))
+    pages = Paginator(results, 10)    
+    products = pages.get_page(pages)   
+    return render(request, 'products/product_list.html', {'products': products})
 
 def details(request, id):
     try:
@@ -44,12 +72,27 @@ def details(request, id):
     return render(request, 'products/details.html', context)
   
 
-def category_details(request, id):
-    category = Category.objects.get(id=id)
-    products = Products.objects.filter(category=category)
-
+"""
+def index(request):
+    categories = Category.objects.all()    
     context = {
-        'products': products
+        'title': 'Choose a category',
+        "categories" : categories
     }
-    return render(request, 'products/category_details.html', context)
-"""  
+    return render(request, 'products/index.html', context)
+
+"""
+
+"""
+class CategoryDetailView(generic.DetailView):
+    model = Category
+    
+    template_name = 'products/category_details.html'   
+
+    #queryset = Products.objects.filter(category=model)
+    def get_queryset(self):
+        queryset = Products.objects.filter(category=self.model)
+        return queryset
+    
+
+"""
