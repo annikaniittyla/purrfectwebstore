@@ -2,7 +2,7 @@ from django.urls import path, include
 from . views import category_details, details
 from . views import CategoryCreate, IndexView, CategoryUpdate, CategoryDelete, ProductCreate, ProductUpdate, ProductDelete, search
 #CategoryDetailView, , DetailView,
-#app_name = 'products'
+app_name = 'products'
 # index, details, 
 """
 urlpatterns = [
