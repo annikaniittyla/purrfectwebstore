@@ -30,27 +30,29 @@ class CategoryUpdate(UpdateView):
 
 class CategoryDelete(DeleteView):
     model = Category
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('products:index')
 class ProductCreate(CreateView):
     model = Products
-    #fields = ['category', 'product_name', 'product_slug', 'product_code', 'product_description', 'product_price', 'product_stock', 'product_available', 'product_image']
+    #fields = ['product_name', 'product_slug', 'product_code', 'product_description', 'product_price', 'product_stock', 'product_image']
+    #fields = ['category','product_name', 'product_slug', 'product_code', 'product_description', 'product_price', 'product_stock', 'product_available', 'product_image']
     form_class = ProductAddForm
-
+"""
     def form_valid(self):
         response = super(ProductCreate, self).form_vallid()
         self.object.categories = self.form.cleaned_data['category']
         return response
-        """
+        
         form.instance.category_name = self.Product.product_name            
         return super(ProductCreate, self).category_fields(form)
-        """
+        
+"""
 class ProductUpdate(UpdateView):
     model = Products
     fields = ['category', 'product_name', 'product_slug', 'product_code', 'product_description', 'product_price', 'product_stock', 'product_available', 'product_image']
 
 class ProductDelete(DeleteView):
     model = Products
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('products:index')
     
 class UserFormView(View):
     form_class = UserForm
@@ -59,6 +61,14 @@ class UserFormView(View):
 def category_details(request, id):
     category = Category.objects.get(id=id)
     products = Products.objects.filter(category=category)
+
+    context = {
+        'products': products
+    }
+    return render(request, 'products/category_details.html', context)
+
+def category_details_all(request):
+    products = Products.objects.all()
 
     context = {
         'products': products

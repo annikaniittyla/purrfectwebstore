@@ -6,8 +6,15 @@ body{
 
 .navbar{
     border-radius: 0;
+    
 }
 
 .navbar-brand{
     font-family: 'Satisfy', cursive;
 }
+
+/* Dropdown menu background color*/
+
+.navbar-nav > li > .dropdown-menu {
+    background-color: #e7e7e7;  
+    color: #555555;  }

@@ -1,4 +1,5 @@
 {% extends 'products/layout.html' %}
+{% load staticfiles %}
 
 {% block content %}
 
@@ -8,22 +9,28 @@
         <h3 class="center-align red lighten-3">{{category_name}}</h3>
         <ul class="collection">
             {% for category in categories %}
-                <li class="collection-item"><a href="{% url 'products:category_details' category.id %}">{{category.category_name}}</a></li>            
+                <!--<li class="collection-item"><a href="{% url 'products:category_details' category.id %}">{{category.category_name}}</a></li> -->           
                 <img src="{{category.category_logo.url}}" class="img-responsive">
             
             <!-- Details -->
-            <a href="{% url 'products:category_details' category.id %}" class="btn btn-primary btn-sm">View Products</a>
+            <a href="{% url 'products:category_details' category.id %}" class="btn btn-primary btn-sm">View Products: {{category.category_name}}</a>
 
+            <!-- Update  -->
+            
             <!-- Delete -->
             <form action="{% url 'products:category-delete' category.id %}" method="post" style="display: inline;">
                 {% csrf_token %}    
-                <input type="hidden" name="category_id" value"{{ category.id}}"/>
+                <input type="hidden" name="category_id" value="{{ category.id }}"/>
                 <button type="submit" class="btn btn-default btn-sm">
                     <span class="glyphicon glyphicon-trash"></span>
                 </button>
             </form>
 
             {% endfor %}
+            <img src="{% static 'products/images/piglet_credits.jpg' %}" class="img-responsive">                      
+            <a href="{% url 'products:category_details_all' %}" class="btn btn-primary btn-sm">Show All Items</a>
         </ul>
-    
+        
+
+
 {% endblock %}

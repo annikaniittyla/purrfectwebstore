@@ -21,24 +21,24 @@ def add_to_cart(request, **kwargs):
     order_item, status = OrderItem.objects.get_or_create(product=product)
     #messages.info(request, "Item added to cart")
     return render(request, 'shoppingcart/order_details.html', {'product': product})
-"""
-def add_to_cart(request, product_id):
+
+def add_to_cart(request, **kwargs):
         product = get_object_or_404(Products, pk=id)
         order, status = Order.objects.get_or_create()
-        order.add_to_cart(product_id)
-        return redirect('/order_details/')
-        
+        order.add_to_cart(kwargs)
+        return redirect('/store/')
+"""        
 
 def delete_from_cart(request, item_id):
     item_to_delete = OrderItem.objects.filter(pk=item_id)
     return redirect(reverse('order_details'))
 
-def order_details(request, **kwargs):
+def store(request, **kwargs):
     existing_order = get_user_pending_order(request)
     context = {
         'order': existing_order
     }
-    return render(request, 'shoppingcart/order_details.html', context)
+    return render(request, 'shoppingcart/store.html', context)
 
 def checkout(request):
     existing_order = get_user_pending_order(request)

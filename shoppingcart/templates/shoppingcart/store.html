@@ -1,0 +1,94 @@
+{% extends "products/layout.html" %}
+{% block title %}Shopping Cart{% endblock %}
+
+<script src="store.js" async></script>
+
+{% block content %}
+
+<section>
+<div class="container">
+    <div class="row">
+        <table class="table table-hover table-bordered text-center">
+            <tr class="text-center">
+            <!-- Column names -->
+                <th>no.</th>
+                <th>Item</th>
+                <th>Price</th>
+            </tr>
+
+            <!-- When items have been added: -->
+
+            {% for item in order.get_cart_items %}
+            <tr>
+                <td>{{ forloop.counter}}</td>
+                
+                <!-- Item name -->
+                <td>{{ item.product.product_name}}
+                    <span class="pull-right">
+                        <a href="{% url 'shoppingcart:delete_item' item.id %}"
+                        data-balloon="remove this item from cart" class="text-danger;">
+                            <i class="fas fa-trash"></i></a>
+                    </span>
+                </td>
+            
+                <!-- Item price -->
+                <td>{{ item.product.product_price}}
+                <div class="cart-price"> <button class="btn btn-danger" type="button">Remove</button>
+                </div>
+                </td>
+
+            <!-- No items -->
+            {% empty %}
+                <tr>
+                    <td conspan=3> You have not added any items yet.</td>
+                </tr>
+            {% endfor %}
+            
+            <!-- Total price -->
+            <tr>
+                {% if order.get_cart_total == None %}
+                <td colspan=2>
+                    <strong class="pull-right">Order Total:</strong>
+                </td>
+
+                <td colspan=1>
+                    <strong class="cart-total-price">{{ order.get_cart_total }}</strong>
+                </td>
+                {% endif %}
+            </tr>
+        </table>
+            
+            <!-- Buttons -->
+            <!-- Continue Shopping -->
+                        
+                    <a href="{% url 'products:index' %}" class="btn btn-warning pull-left">
+                        <!--{% if order %}Continue Shopping{% else %}Add Items to Cart-->
+                        Continue Shopping
+                        <!--{% endif %}-->
+                     </a>
+                
+
+            <!-- Purchase -->
+                <button class="btn btn-danger pull-right" type="button">Purchase</button>
+            <!--
+                <td colspan=2>
+                    {% if order.get_cart_items %}
+                        <a href="{% url 'shoppingcart:checkout' %}" 
+                        class="pull-right btn btn-primary">Proceed to Checkout</a>
+                    {% endif %}
+                </td>
+            -->
+     </div>
+</div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+{% endblock %}
+
+
+
+
+
+
