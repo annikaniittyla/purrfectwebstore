@@ -107,6 +107,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    '/webstore/products/static/',
+    '/webstore/shoppingcart/static'
+]
+
 MEDIA_ROOT = BASE_DIR
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'pic_folder')
 MEDIA_URL = '/pic_folder/'

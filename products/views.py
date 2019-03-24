@@ -77,7 +77,7 @@ def category_details_all(request):
 
 def search(request):
     query = request.GET.get('q')
-    results = Products.objects.filter(Q(product_name__icontains=query) | Q(product_description__icontains=query))
+    results = Products.objects.filter(Q(product_name__icontains=query) | Q(product_description__icontains=query) | Q(product_code__icontains=query))
     pages = Paginator(results, 10)    
     products = pages.get_page(pages)   
     return render(request, 'products/product_list.html', {'products': products})
