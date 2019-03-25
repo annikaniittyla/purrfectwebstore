@@ -16,11 +16,7 @@ class IndexView(generic.ListView):
     
     def get_queryset(self):
         return Category.objects.all()
-"""
-class DetailView(generic.DetailView):
-    model = Products
-    template_name = 'products/details.html'
-"""
+
 class CategoryCreate(CreateView):
     model = Category
     fields = ['category_name', 'category_slug', 'category_logo']
@@ -37,6 +33,8 @@ class ProductCreate(CreateView):
     #fields = ['category','product_name', 'product_slug', 'product_code', 'product_description', 'product_price', 'product_stock', 'product_available', 'product_image']
     form_class = ProductAddForm
 """
+    Attemp to fix product-add functions so that a category can be chosen.
+    
     def form_valid(self):
         response = super(ProductCreate, self).form_vallid()
         self.object.categories = self.form.cleaned_data['category']
@@ -91,28 +89,3 @@ def details(request, id):
     return render(request, 'products/details.html', context)
   
 
-
-"""
-def index(request):
-    categories = Category.objects.all()    
-    context = {
-        'title': 'Choose a category',
-        "categories" : categories
-    }
-    return render(request, 'products/index.html', context)
-
-"""
-
-"""
-class CategoryDetailView(generic.DetailView):
-    model = Category
-    
-    template_name = 'products/category_details.html'   
-
-    #queryset = Products.objects.filter(category=model)
-    def get_queryset(self):
-        queryset = Products.objects.filter(category=self.model)
-        return queryset
-    
-
-"""

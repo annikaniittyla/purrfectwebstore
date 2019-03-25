@@ -17,9 +17,14 @@ class ProductAddForm(forms.ModelForm):
     class Meta:
         model = Products
         exclude = ['product_available']
+        """
+        Trying to fix the product-add form.
+        
         #fields = ['category', 'product_name', 'product_slug', 'product_code', 'product_description', 'product_price', 'product_stock', 'product_available', 'product_image']
         #fields = ['product_name', 'product_slug', 'product_code', 'product_description', 'product_price', 'product_stock', 'product_available', 'product_image']
         #fields = ['product_name']
+
+        """
    
     def __init__(self, *args, **kwargs):
         super(ProductAddForm, self).__init__(*args, **kwargs)
@@ -28,10 +33,4 @@ class ProductAddForm(forms.ModelForm):
 
 
 
-    """
-    def __init__(self, Category):
-        category_names = category_names.pop('category_names', None)
-        super(forms.ChoiceForm, self).__init__(Category)
-        self.fields['category_names'] = ModelChoiceField(queryset=Category.objects.filter(category_names=category_names)),
-        empty_label = "Choose a category"
-    """
+    

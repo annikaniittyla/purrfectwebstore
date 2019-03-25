@@ -1,3 +1,5 @@
+"This file is for shopping cart functionalities but it is not ready yet."
+
 if (document.readyState == 'loading'){
     document.addEventListener('DOMContentLoaded', ready)
 } else {

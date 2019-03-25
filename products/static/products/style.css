@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+/* Style for fixing the transparent dropdown navibar should be added. */
+
 body{
     background: rgba(250, 7, 7, 0.192) /*url("products/images/paper-texture-background.jpg")*/;
     
@@ -14,19 +16,14 @@ body{
     font-family: 'Satisfy', cursive;
 }rgba
 
-/* Dropdown menu background color*/
+
 
 
     
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 .row.content {height: 450px}
     
-    /* Set gray background color and 100% height */
-.sidenav {
-    padding-top: 20px;
-    background-color: #fff0f0;
-    height: 100%;
-    }
+
     
     /* Set black background color, white text and some padding */
 footer {
@@ -35,11 +32,4 @@ footer {
     padding: 15px;
     }
     
-    /* On small screens, set height to 'auto' for sidenav and grid */
-@media screen and (max-width: 767px) {
-    .sidenav {
-            height: auto;
-            padding: 15px;
-        }
-    .row.content {height:auto;} 
-    }
+ 

@@ -11,14 +11,15 @@ from .views import (
 app_name = 'shoppingcart'
 
 urlpatterns = [
-    #path('details/<int:id>/add-to-cart/<int:id>', add_to_cart, name='add-to-cart'),
-    #path('add-to-cart/<int:id>', add_to_cart, name='add-to-cart'),
+    
     path('item/delete/<int:id>/', delete_from_cart, name='delete-from-cart'),
     path('store/', store, name='store'),
     path('checkout/', checkout, name='checkout'),
 
-  
+    #URL:s ready for the add to cart function:
 
+    #path('details/<int:id>/add-to-cart/<int:id>', add_to_cart, name='add-to-cart'),
+    #path('add-to-cart/<int:id>', add_to_cart, name='add-to-cart'),
 
 
 ]

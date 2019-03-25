@@ -16,17 +16,15 @@ def get_user_pending_order(reguest):
     # return 0
 
 """
+This function will add products to the shopping cart after the shopping cart is closer to be ready.
+ 
 def add_to_cart(request, **kwargs):
     product = Products.objects.filter(
     order_item, status = OrderItem.objects.get_or_create(product=product)
     #messages.info(request, "Item added to cart")
     return render(request, 'shoppingcart/order_details.html', {'product': product})
 
-def add_to_cart(request, **kwargs):
-        product = get_object_or_404(Products, pk=id)
-        order, status = Order.objects.get_or_create()
-        order.add_to_cart(kwargs)
-        return redirect('/store/')
+
 """        
 
 def delete_from_cart(request, item_id):

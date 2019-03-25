@@ -22,8 +22,11 @@ Start your trip by choosing a category below and open it to see what we have off
             <!-- Details -->
             <a href="{% url 'products:category_details' category.id %}" class="btn btn-primary btn-sm">View Products: {{category.category_name}}</a>
 
-            <!-- Update  -->
             
+            <!-- Update and Delete buttons have been hidden from the webpage for avoiding users to delete all products 
+            in a category. The buttons can be added back if wanted -->
+            
+
             <!-- Delete -->
             <form action="{% url 'products:category-delete' category.id %}" method="post" style="display: inline;">
                 {% csrf_token %}    
